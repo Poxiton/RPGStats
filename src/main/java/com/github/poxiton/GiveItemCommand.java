@@ -9,23 +9,23 @@ import org.bukkit.entity.Player;
 
 public class GiveItemCommand implements CommandExecutor {
 
-    private StatsManager manager;
+  private StatsManager manager;
 
-    public GiveItemCommand(StatsManager manager) {
-        this.manager = manager;
-    }
+  public GiveItemCommand(StatsManager manager) {
+    this.manager = manager;
+  }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("rpgitem")) {
-            Player player = (Player) sender;
+  @Override
+  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    if (cmd.getName().equalsIgnoreCase("rpgitem")) {
+      Player player = (Player) sender;
 
-            manager.setItemStat(player.getInventory().getItemInMainHand(), new ItemsData() {
-                {
-                    lifesteal = 0.1f;
-                }
-            });
+      manager.setItemStat(player.getInventory().getItemInMainHand(), new ItemsData() {
+        {
+          lifesteal = 0.1f;
         }
-        return true;
+      });
     }
+    return true;
+  }
 }

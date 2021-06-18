@@ -15,32 +15,32 @@ import org.bukkit.plugin.Plugin;
 
 public class RPGStatsListener implements Listener {
 
-    private StatsManager manager;
-    private Plugin plugin;
+  private StatsManager manager;
+  private Plugin plugin;
 
-    public RPGStatsListener(Plugin plugin, StatsManager manager) {
-        this.plugin = plugin;
-        this.manager = manager;
-    }
+  public RPGStatsListener(Plugin plugin, StatsManager manager) {
+    this.plugin = plugin;
+    this.manager = manager;
+  }
 
-    @EventHandler
-    public void PlayerDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player))
-            return;
+  @EventHandler
+  public void PlayerDamage(EntityDamageByEntityEvent event) {
+    if (!(event.getDamager() instanceof Player))
+      return;
 
-        Player player = (Player) event.getDamager();
-        ItemStack item = player.getInventory().getItemInMainHand();
+    Player player = (Player) event.getDamager();
+    ItemStack item = player.getInventory().getItemInMainHand();
 
-        // This check item type
-        if (item.getType() == Material.AIR)
-            return;
+    // This check item type
+    if (item.getType() == Material.AIR)
+      return;
 
-        PersistentDataContainer itemData = item.getItemMeta().getPersistentDataContainer();
+    PersistentDataContainer itemData = item.getItemMeta().getPersistentDataContainer();
 
-        // Checking if an item has a given data
-        if (!itemData.has(new NamespacedKey(plugin, "itemStats"), new ItemsDataType()))
-            return;
+    // Checking if an item has a given data
+    if (!itemData.has(new NamespacedKey(plugin, "itemStats"), new ItemsDataType()))
+      return;
 
-        manager.healPlayer(player, item, event.getDamage());
-    }
+    manager.lifeStealHeal(player, item, event.getDamage());
+  }
 }

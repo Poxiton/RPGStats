@@ -12,32 +12,32 @@ import org.jetbrains.annotations.NotNull;
 
 public class ItemsDataType implements PersistentDataType<byte[], ItemsData> {
 
-    @Override
-    public @NotNull Class<byte[]> getPrimitiveType() {
-        return byte[].class;
-    }
+  @Override
+  public @NotNull Class<byte[]> getPrimitiveType() {
+    return byte[].class;
+  }
 
-    @Override
-    public @NotNull Class<ItemsData> getComplexType() {
-        return ItemsData.class;
-    }
+  @Override
+  public @NotNull Class<ItemsData> getComplexType() {
+    return ItemsData.class;
+  }
 
-    @Override
-    public byte @NotNull [] toPrimitive(@NotNull ItemsData complex, @NotNull PersistentDataAdapterContext context) {
-        return SerializationUtils.serialize(complex);
-    }
+  @Override
+  public byte @NotNull [] toPrimitive(@NotNull ItemsData complex, @NotNull PersistentDataAdapterContext context) {
+    return SerializationUtils.serialize(complex);
+  }
 
-    @Override
-    public @NotNull ItemsData fromPrimitive(byte @NotNull [] primitive, @NotNull PersistentDataAdapterContext context) {
-        try {
-            InputStream is = new ByteArrayInputStream(primitive);
-            ObjectInputStream o = new ObjectInputStream(is);
+  @Override
+  public @NotNull ItemsData fromPrimitive(byte @NotNull [] primitive, @NotNull PersistentDataAdapterContext context) {
+    try {
+      InputStream is = new ByteArrayInputStream(primitive);
+      ObjectInputStream o = new ObjectInputStream(is);
 
-            return (ItemsData) o.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+      return (ItemsData) o.readObject();
+    } catch (IOException | ClassNotFoundException e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 
 }
