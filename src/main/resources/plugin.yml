@@ -1,0 +1,8 @@
+name: RPGStats
+version: 1.0
+api-version: 1.16
+author: Poxiton
+main: com.github.poxiton.RPGStats
+commands:
+  rpgitem:
+    description: "Test command"
